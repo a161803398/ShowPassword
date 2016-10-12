@@ -1,0 +1,29 @@
+{
+    "extension_description": {
+        "message": "当鼠标停留在密码框时显示密码。"
+    },
+    "optionTitle": {
+        "message": "ShowPassword 选项"
+    },
+    "labelWhen": {
+        "message": "何时显示密码:"
+    },
+    "optMouseOver": {
+        "message": "鼠标在密码框上"
+    },
+    "optDblClick": {
+        "message": "点两下密码框后"
+    },
+    "optFocus": {
+        "message": "选取密码框时"
+    },
+	"optCtrl": {
+        "message": "按下Ctrl键后"
+    },
+    "labelWait": {
+        "message": "等待:"
+    },
+    "labelPreview": {
+        "message": "测试用密码框:"
+    }
+}

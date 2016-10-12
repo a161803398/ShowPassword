@@ -1,0 +1,29 @@
+{
+    "extension_description": {
+        "message": "Show password when mouse over password fields."
+    },
+    "optionTitle": {
+        "message": "ShowPassword Option"
+    },
+    "labelWhen": {
+        "message": "When to show password:"
+    },
+    "optMouseOver": {
+        "message": "Mouse over"
+    },
+    "optDblClick": {
+        "message": "Double Click"
+    },
+    "optFocus": {
+        "message": "On Focus"
+    },
+    "optCtrl": {
+        "message": "Press Ctrl Key"
+    },
+    "labelWait":{
+        "message":"Wait:"   
+    },
+    "labelPreview": {
+        "message": "Preview Password field:"
+    }
+}

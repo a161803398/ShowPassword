@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2014 yuSing.
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301  USA
+-->
+<html>
+    <head>
+        <title>ShowPassword Option</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style>
+            body{
+                text-align: center;
+            }
+            table{
+                margin-left:auto; 
+                margin-right:auto;
+            }
+            a.donate{
+                font-size:0.8em;
+                color:#555;
+                text-decoration: none;
+            }
+
+            a.donate:hover{
+                font-size:0.8em; 
+                color:#000;
+                text-decoration:underline;
+            }
+        </style>
+        <script src="options.js"></script>
+    </head>
+    <body>
+        <h1 id="optionTitle">ShowPassword Option</h1>
+        <table style="text-align: left;">
+            <tr>
+                <td>
+                    <label id="labelWhen">When to show password:</label>
+                </td>
+                <td>
+                    <select id="selectBehave">
+                        <option id="optMouseOver">Mouse over</option>
+                        <option id="optDblClick">Double Click</option>
+                        <option id="optFocus">On Focus</option>
+						<option id="optCtrl">Press Ctrl Key</option>
+                    </select>
+                    <div id="divWait" style="display: inline">
+                        <label id="labelWait">Wait:</label>
+                        <input id="inputWait" type="number" min="0" value="500" style="width: 50px;">ms
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label id="labelPreview">Preview Password field:</label>
+                </td>
+                <td>
+                    <input id="passwordTest" type="password" size="25" value="Password" style="width: 100px;">                    
+                </td>
+            </tr>
+        </table>
+        <br>
+        Donate BTC:
+        <a href="bitcoin:1H8qRgzgEXcxHRqbQzb37NFf3JVySDoktE" class="donate">1H8qRgzgEXcxHRqbQzb37NFf3JVySDoktE</a>
+
+        <script src="showPassword.js"></script>
+    </body>
+</html>
