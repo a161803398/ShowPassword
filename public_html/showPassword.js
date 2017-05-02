@@ -19,7 +19,15 @@
             tar.isMouseOver = false;
             tar.type = 'password';
         }, false);
-
+		
+		tar.addEventListener('blur', function() {
+            tar.type = 'password';
+        }, false);
+		
+        tar.addEventListener('keydown', function(e) {
+            if (e.keyCode === KEY_ENTER)
+                tar.type = 'password';
+        }, false);
     }
 
     function mouseDblClick(tar) {
