@@ -113,17 +113,16 @@
   const actionsArr = [mouseOver, mouseDblClick, mouseFocus, ctrlKeyShift]
 
   const doc = win.document
-  const MutationObserver = win.MutationObserver || win.WebKitMutationObserver
+  const modified = new WeakSet()
 
   function modifyInputs () {
     const passwordInputs = doc.querySelectorAll('input[type=password]')
-    for (let j = 0; j < passwordInputs.length; j++) {
-      const passwordInput = passwordInputs[j]
-
-      if (!passwordInput.ready) {
-        actionsArr[behave](passwordInput)
-        passwordInput.ready = true // mark as modified
+    for (const passwordInput of passwordInputs) {
+      if (modified.has(passwordInput)) {
+        continue
       }
+      actionsArr[behave](passwordInput)
+      modified.add(passwordInput)
     }
   }
 
