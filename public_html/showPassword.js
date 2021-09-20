@@ -120,29 +120,12 @@
   const doc = win.document
   const modified = new WeakSet()
 
-  function modifyInput (target) {
-    actionsArr[behave](target)
-    modified.add(target)
-  }
-  function checkAndModify (target) {
-    if (!target || modified.has(target)) {
-      return
-    }
-    if (target.tagName === 'INPUT' && target.getAttribute('type') === 'password') {
-      modifyInput(target)
-    }
-    if (target.children) {
-      for (const child of target.children) {
-        checkAndModify(child)
-      }
-    }
-  }
-
   function modifyAllInputs () {
     const passwordInputs = doc.querySelectorAll('input[type=password]')
     passwordInputs.forEach(input => {
       if (!modified.has(input)) {
-        modifyInput(input)
+        actionsArr[behave](input)
+        modified.add(input)
       }
     })
   }
@@ -165,16 +148,10 @@
 
   modifyWeb()
 
-  const docObserver = new MutationObserver(records => {
-    records.forEach(record => {
-      checkAndModify(record.target)
-      if (!record.addedNodes) {
-        return
-      }
-      for (const node of record.addedNodes) {
-        checkAndModify(node)
-      }
-    })
+  const docObserver = new MutationObserver(() => {
+    // NOTE: Despite we can recursively check element from addNodes.
+    // Benchmark shows that it is much fast to just use `querySelectorAll` to find password inputs
+    modifyWeb()
   })
 
   docObserver.observe(doc.documentElement, {
