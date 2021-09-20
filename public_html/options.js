@@ -30,7 +30,7 @@ function localization () {
 }
 
 function loadSetting () {
-  chrome.storage.sync.get(function (data) {
+  chrome.storage.sync.get(data => {
     if ('behave' in data) {
       selectBehave.selectedIndex = data.behave
       inputWait.value = data.wait
@@ -49,14 +49,14 @@ function saveSetting () {
   window.location.reload()
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   selectBehave = document.getElementById('selectBehave')
   inputWait = document.getElementById('inputWait')
 
   selectBehave.addEventListener('change', saveSetting, false)
   inputWait.addEventListener('blur', saveSetting, false)
 
-  document.getElementById('passwordTest').addEventListener('keydown', function (e) {
+  document.getElementById('passwordTest').addEventListener('keydown', e => {
     if (e.keyCode === KEY_ENTER) {
       if (document.getElementById('passwordTest').value.toLowerCase() === 'taiwan') {
         window.location = 'http://en.wikipedia.org/wiki/Taiwan'

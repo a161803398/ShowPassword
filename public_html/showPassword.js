@@ -7,31 +7,33 @@
   let hasLoadSetting = false
 
   function mouseOver (tar) {
-    tar.addEventListener('mouseover', function () {
+    tar.addEventListener('mouseover', () => {
       tar.isMouseOver = true
-      setTimeout(function () {
+      setTimeout(() => {
         if (tar.isMouseOver) {
           tar.type = 'text'
         }
       }, wait)
     }, false)
 
-    tar.addEventListener('mouseout', function () {
+    tar.addEventListener('mouseout', () => {
       tar.isMouseOver = false
       tar.type = 'password'
     }, false)
 
-    tar.addEventListener('blur', function () {
+    tar.addEventListener('blur', () => {
       tar.type = 'password'
     }, false)
 
-    tar.addEventListener('keydown', function (e) {
-      if (e.keyCode === KEY_ENTER) { tar.type = 'password' }
+    tar.addEventListener('keydown', e => {
+      if (e.keyCode === KEY_ENTER) {
+        tar.type = 'password'
+      }
     }, false)
   }
 
   function mouseDblClick (tar) {
-    tar.addEventListener('dblclick', function () {
+    tar.addEventListener('dblclick', () => {
       if (tar.type === 'password') {
         tar.type = 'text'
       } else {
@@ -39,26 +41,30 @@
       }
     }, false)
 
-    tar.addEventListener('blur', function () {
+    tar.addEventListener('blur', () => {
       tar.type = 'password'
     }, false)
 
-    tar.addEventListener('keydown', function (e) {
-      if (e.keyCode === KEY_ENTER) { tar.type = 'password' }
+    tar.addEventListener('keydown', e => {
+      if (e.keyCode === KEY_ENTER) {
+        tar.type = 'password'
+      }
     }, false)
   }
 
   function mouseFocus (tar) {
-    tar.addEventListener('focus', function () {
+    tar.addEventListener('focus', () => {
       tar.type = 'text'
     }, false)
 
-    tar.addEventListener('blur', function () {
+    tar.addEventListener('blur', () => {
       tar.type = 'password'
     }, false)
 
-    tar.addEventListener('keydown', function (e) {
-      if (e.keyCode === KEY_ENTER) { tar.type = 'password' }
+    tar.addEventListener('keydown', e => {
+      if (e.keyCode === KEY_ENTER) {
+        tar.type = 'password'
+      }
     }, false)
   }
 
@@ -67,14 +73,14 @@
     let notPressCtrl = true
     let onlyCtrl = true
 
-    tar.addEventListener('blur', function () {
+    tar.addEventListener('blur', () => {
       tar.type = 'password'
       isHide = true
       notPressCtrl = true
       onlyCtrl = true
     }, false)
 
-    tar.addEventListener('keyup', function (e) {
+    tar.addEventListener('keyup', e => {
       if (e.keyCode === KEY_CTRL) {
         if (onlyCtrl) {
           isHide = !isHide
@@ -92,7 +98,7 @@
       }
     }, false)
 
-    tar.addEventListener('keydown', function (e) {
+    tar.addEventListener('keydown', e => {
       if (e.keyCode === KEY_ENTER) {
         tar.type = 'password'
         isHide = true
@@ -131,7 +137,7 @@
       modifyInputs()
     } else {
     // loadSetting
-      chrome.storage.sync.get(function (data) {
+      chrome.storage.sync.get(data => {
         if ('behave' in data) {
           behave = data.behave
           wait = data.wait
