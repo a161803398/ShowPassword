@@ -117,24 +117,26 @@
   }
 
   const actionsArr = [mouseOver, mouseDblClick, mouseFocus, ctrlKeyShift]
-
   const doc = win.document
   const modified = new WeakSet()
 
-  function modifyInputs () {
+  function modifyInput (target) {
+    actionsArr[behave](target)
+    modified.add(target)
+  }
+
+  function modifyAllInputs () {
     const passwordInputs = doc.querySelectorAll('input[type=password]')
-    for (const passwordInput of passwordInputs) {
-      if (modified.has(passwordInput)) {
-        continue
+    passwordInputs.forEach(input => {
+      if (!modified.has(input)) {
+        modifyInput(input)
       }
-      actionsArr[behave](passwordInput)
-      modified.add(passwordInput)
-    }
+    })
   }
 
   function modifyWeb () {
     if (hasLoadSetting) {
-      modifyInputs()
+      modifyAllInputs()
     } else {
     // loadSetting
       chrome.storage.sync.get(data => {
@@ -142,7 +144,7 @@
           behave = data.behave
           wait = data.wait
         }
-        modifyInputs()
+        modifyAllInputs()
         hasLoadSetting = true
       })
     }
@@ -150,10 +152,23 @@
 
   modifyWeb()
 
-  const observer = new MutationObserver(modifyWeb)
+  const docObserver = new MutationObserver(records => {
+    records.forEach(record => {
+      const target = record.target
+      if (!target || modified.has(target)) {
+        return
+      }
+      if (target.tagName === 'INPUT' && target.getAttribute('type') === 'password') {
+        modifyInput(target)
+      }
+    })
+  })
 
-  observer.observe(doc.documentElement, {
+  docObserver.observe(doc.documentElement, {
     childList: true,
-    subtree: true
+    subtree: true,
+    // Some website add input with text type at first, then change its type to password.
+    attributes: true,
+    attributeFilter: ['type']
   })
 })(this)
