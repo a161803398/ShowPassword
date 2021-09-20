@@ -124,6 +124,19 @@
     actionsArr[behave](target)
     modified.add(target)
   }
+  function checkAndModify (target) {
+    if (!target || modified.has(target)) {
+      return
+    }
+    if (target.tagName === 'INPUT' && target.getAttribute('type') === 'password') {
+      modifyInput(target)
+    }
+    if (target.children) {
+      for (const child of target.children) {
+        checkAndModify(child)
+      }
+    }
+  }
 
   function modifyAllInputs () {
     const passwordInputs = doc.querySelectorAll('input[type=password]')
@@ -154,12 +167,12 @@
 
   const docObserver = new MutationObserver(records => {
     records.forEach(record => {
-      const target = record.target
-      if (!target || modified.has(target)) {
+      checkAndModify(record.target)
+      if (!record.addedNodes) {
         return
       }
-      if (target.tagName === 'INPUT' && target.getAttribute('type') === 'password') {
-        modifyInput(target)
+      for (const node of record.addedNodes) {
+        checkAndModify(node)
       }
     })
   })
