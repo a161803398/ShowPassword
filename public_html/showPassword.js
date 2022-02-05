@@ -7,17 +7,19 @@
   let hasLoadSetting = false
 
   function mouseOver (tar) {
+    let isMouseOver = false
+
     tar.addEventListener('mouseover', () => {
-      tar.isMouseOver = true
+      isMouseOver = true
       setTimeout(() => {
-        if (tar.isMouseOver) {
+        if (isMouseOver) {
           tar.type = 'text'
         }
       }, wait)
     }, false)
 
     tar.addEventListener('mouseout', () => {
-      tar.isMouseOver = false
+      isMouseOver = false
       tar.type = 'password'
     }, false)
 
