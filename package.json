@@ -1,6 +1,6 @@
 {
   "name": "show-password",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Chrome extension to Show password when mouse over password fields.\r ![Alt text](/pictures/preview.png)\r # About\r Have you ever deleted whole password just because you typed a single letter wrong ?",
   "main": "index.js",
   "scripts": {
